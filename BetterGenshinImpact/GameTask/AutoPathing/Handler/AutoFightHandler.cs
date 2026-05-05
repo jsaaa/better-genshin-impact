@@ -28,11 +28,11 @@ internal class AutoFightHandler : IActionHandler
         TaskControl.Logger.LogInformation("执行 {Text}", "自动战斗");
         // 爷们要战斗
         AutoFightParam taskParams = null;
-        if (config != null && config is PathingPartyConfig patyConfig && patyConfig.AutoFightEnabled)
+        if (config is PathingPartyConfig { Enabled: true, AutoFightEnabled: true } partyConfig)
         {
             //替换配置为地图追踪
 
-            taskParams = GetFightAutoFightParam(patyConfig.AutoFightConfig);
+            taskParams = GetFightAutoFightParam(partyConfig.AutoFightConfig);
         }
         else
         {

@@ -82,7 +82,7 @@ public partial class CommonSettingsPageViewModel : ViewModel
     public ObservableCollection<string> MapPathingTypes { get; } = ["SIFT", "TemplateMatch"];
 
     [ObservableProperty] private FrozenDictionary<string, string> _languageDict =
-        new string[] { "zh-Hans", "zh-Hant", "en"}
+        new string[] { "zh-Hans", "zh-Hant", "en", "ja"}
             .ToFrozenDictionary(
                 c => c,
                 c =>
@@ -111,6 +111,7 @@ public partial class CommonSettingsPageViewModel : ViewModel
 
         var urls = new[]
         {
+            $"https://raw.githubusercontent.com/jsaaa/bettergi-i18n/refs/heads/main/i18n/{cultureName}.json",
             $"https://raw.githubusercontent.com/babalae/bettergi-i18n/refs/heads/main/i18n/{cultureName}.json",
             $"https://cnb.cool/bettergi/bettergi-i18n/-/git/raw/main/i18n/{cultureName}.json"
         };

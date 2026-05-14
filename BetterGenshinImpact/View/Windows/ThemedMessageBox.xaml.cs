@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using BetterGenshinImpact.Helpers;
 using BetterGenshinImpact.Helpers.Ui;
+using BetterGenshinImpact.Service.Interface;
 using Wpf.Ui.Controls;
 using MessageBoxButton = System.Windows.MessageBoxButton;
 using MessageBoxResult = System.Windows.MessageBoxResult;
@@ -129,6 +131,9 @@ public partial class ThemedMessageBox : FluentWindow
         MessageBoxResult defaultResult = MessageBoxResult.None,
         Window? owner = null)
     {
+        content = TranslationHelper.T(content, MissingTextSource.Dialog);
+        title = TranslationHelper.T(title, MissingTextSource.Dialog);
+
         var messageBox = new ThemedMessageBox
         {
             Title = title
@@ -236,30 +241,30 @@ public partial class ThemedMessageBox : FluentWindow
         switch (button)
         {
             case MessageBoxButton.OK:
-                messageBox.PrimaryButton.Content = "确定";
+                messageBox.PrimaryButton.Content = TranslationHelper.T("确定", MissingTextSource.Dialog);
                 messageBox.PrimaryButton.Visibility = Visibility.Visible;
                 break;
 
             case MessageBoxButton.OKCancel:
-                messageBox.PrimaryButton.Content = "确定";
+                messageBox.PrimaryButton.Content = TranslationHelper.T("确定", MissingTextSource.Dialog);
                 messageBox.PrimaryButton.Visibility = Visibility.Visible;
-                messageBox.SecondaryButton.Content = "取消";
+                messageBox.SecondaryButton.Content = TranslationHelper.T("取消", MissingTextSource.Dialog);
                 messageBox.SecondaryButton.Visibility = Visibility.Visible;
                 break;
 
             case MessageBoxButton.YesNo:
-                messageBox.PrimaryButton.Content = "是";
+                messageBox.PrimaryButton.Content = TranslationHelper.T("是", MissingTextSource.Dialog);
                 messageBox.PrimaryButton.Visibility = Visibility.Visible;
-                messageBox.SecondaryButton.Content = "否";
+                messageBox.SecondaryButton.Content = TranslationHelper.T("否", MissingTextSource.Dialog);
                 messageBox.SecondaryButton.Visibility = Visibility.Visible;
                 break;
 
             case MessageBoxButton.YesNoCancel:
-                messageBox.PrimaryButton.Content = "是";
+                messageBox.PrimaryButton.Content = TranslationHelper.T("是", MissingTextSource.Dialog);
                 messageBox.PrimaryButton.Visibility = Visibility.Visible;
-                messageBox.SecondaryButton.Content = "否";
+                messageBox.SecondaryButton.Content = TranslationHelper.T("否", MissingTextSource.Dialog);
                 messageBox.SecondaryButton.Visibility = Visibility.Visible;
-                messageBox.CloseButton.Content = "取消";
+                messageBox.CloseButton.Content = TranslationHelper.T("取消", MissingTextSource.Dialog);
                 messageBox.CloseButton.Visibility = Visibility.Visible;
                 break;
         }

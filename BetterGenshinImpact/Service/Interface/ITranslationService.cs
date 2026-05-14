@@ -4,10 +4,13 @@ namespace BetterGenshinImpact.Service.Interface;
 
 public enum MissingTextSource
 {
-    Log,
-    UiStaticLiteral,
-    UiDynamicBinding,
-    Unknown
+    Log = 0,
+    UiStaticLiteral = 1,
+    UiDynamicBinding = 2,
+    Unknown = 3,
+    Notification = 4,
+    Toast = 5,
+    Dialog = 6
 }
 
 public sealed class TranslationSourceInfo

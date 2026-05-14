@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BetterGenshinImpact.GameTask;
 using BetterGenshinImpact.GameTask.Common;
 using BetterGenshinImpact.GameTask.Model.Area;
+using BetterGenshinImpact.Helpers;
+using BetterGenshinImpact.Service.Interface;
 using BetterGenshinImpact.Service.Notification.Model;
 using BetterGenshinImpact.Service.Notification.Model.Enum;
 using BetterGenshinImpact.Service.Notifier;
@@ -359,6 +361,7 @@ public class NotificationService : IHostedService, IDisposable
             }
 
             var testData = CreateTestNotificationData();
+            testData.TranslateForUser();
             await notifier.SendAsync(testData);
             return NotificationTestResult.Success();
         }
@@ -368,7 +371,8 @@ public class NotificationService : IHostedService, IDisposable
         }
         catch (Exception ex)
         {
-            return NotificationTestResult.Error($"测试通知时发生未知错误: {ex.Message}");
+            return NotificationTestResult.Error(
+                TranslationHelper.Format("测试通知时发生未知错误: {0}", MissingTextSource.Notification, ex.Message));
         }
     }
 

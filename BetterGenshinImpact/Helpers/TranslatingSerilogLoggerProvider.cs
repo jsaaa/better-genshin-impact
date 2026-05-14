@@ -66,7 +66,7 @@ public sealed class TranslatingSerilogLoggerProvider : ILoggerProvider
             }
 
             var (template, values) = ExtractTemplateAndValues(state, formatter, exception);
-            var translatedTemplate = RuntimeHelper.IsDebuggerAttached
+            var translatedTemplate = RuntimeHelper.IsDebuggerAttached || logLevel is LogLevel.Trace or LogLevel.Debug
                 ? template
                 : _translationService.Translate(template, TranslationSourceInfo.From(MissingTextSource.Log));
 

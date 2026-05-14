@@ -23,6 +23,8 @@ using BetterGenshinImpact.GameTask;
 using BetterGenshinImpact.GameTask.Model;
 using BetterGenshinImpact.GameTask.Model.Area;
 using BetterGenshinImpact.Service.Notification;
+using BetterGenshinImpact.Helpers;
+using BetterGenshinImpact.Service.Interface;
 using BetterGenshinImpact.View.Drawable;
 using Microsoft.Extensions.Logging;
 using OpenCvSharp;
@@ -132,7 +134,8 @@ public class AutoLeyLineOutcropTask : ISoloTask
             _logger.LogError("自动地脉花执行失败:" + e.Message);
             if (_taskParam.IsNotification)
             {
-                Notify.Event("AutoLeyLineOutcrop").Error($"任务失败: {e.Message}");
+                Notify.Event("AutoLeyLineOutcrop").Error(
+                    TranslationHelper.Format("任务失败: {0}", MissingTextSource.Notification, e.Message));
             }
 
             throw new Exception($"自动地脉花执行失败: {e.Message}", e);

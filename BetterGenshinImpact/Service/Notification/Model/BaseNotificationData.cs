@@ -3,6 +3,8 @@ using BetterGenshinImpact.Service.Notification.Model.Enum;
 using System.Text.Json.Serialization;
 using BetterGenshinImpact.GameTask.Common;
 using BetterGenshinImpact.Service.Notification.Converter;
+using BetterGenshinImpact.Helpers;
+using BetterGenshinImpact.Service.Interface;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -49,6 +51,7 @@ public class BaseNotificationData
     {
         try
         {
+            TranslateForUser();
             NotificationService.Instance().NotifyAllNotifiers(this);
         }
         catch (Exception e)
@@ -89,5 +92,18 @@ public class BaseNotificationData
         Message = message + Environment.NewLine + exception.Message + Environment.NewLine + exception.StackTrace;
         Result = NotificationEventResult.Fail;
         Send();
+    }
+
+    public void TranslateForUser()
+    {
+        if (!string.IsNullOrWhiteSpace(Message))
+        {
+            Message = TranslationHelper.TranslateMultiline(Message, MissingTextSource.Notification);
+        }
+
+        if (Data is string text)
+        {
+            Data = TranslationHelper.T(text, MissingTextSource.Notification);
+        }
     }
 }

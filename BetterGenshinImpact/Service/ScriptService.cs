@@ -19,6 +19,7 @@ using BetterGenshinImpact.GameTask.Common.Job;
 using BetterGenshinImpact.GameTask.FarmingPlan;
 using BetterGenshinImpact.GameTask.LogParse;
 using BetterGenshinImpact.GameTask.TaskProgress;
+using BetterGenshinImpact.Helpers;
 using BetterGenshinImpact.Service.Interface;
 using BetterGenshinImpact.Service.Notification;
 using BetterGenshinImpact.Service.Notification.Model.Enum;
@@ -301,7 +302,8 @@ public partial class ScriptService : IScriptService
                         if (fisrt )
                         {
                             fisrt = false;
-                            Notify.Event(NotificationEvent.GroupStart).Success($"配置组{groupName}启动");
+                            Notify.Event(NotificationEvent.GroupStart).Success(
+                                TranslationHelper.Format("配置组{0}启动", MissingTextSource.Notification, groupName));
                         }
 
                         if (!RunnerContext.Instance.IsPreExecution &&taskProgress != null)
@@ -439,7 +441,8 @@ public partial class ScriptService : IScriptService
         {
             if (CancellationContext.Instance.IsManualStop is false)
             {
-                Notify.Event(NotificationEvent.GroupEnd).Success($"配置组{groupName}结束");
+                Notify.Event(NotificationEvent.GroupEnd).Success(
+                    TranslationHelper.Format("配置组{0}结束", MissingTextSource.Notification, groupName));
             }
         }
 

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using BetterGenshinImpact.Helpers;
+using BetterGenshinImpact.Service.Interface;
 
 namespace BetterGenshinImpact.Service.Notification.Model.Enum;
 
@@ -47,5 +49,5 @@ public class NotificationEvent(string code, string msg)
     }
 
     public string Code { get; private set; } = code;
-    public string Msg { get; private set; } = msg;
+    public string Msg => TranslationHelper.T(msg, MissingTextSource.Notification);
 }

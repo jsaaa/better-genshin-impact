@@ -23,6 +23,8 @@ using BetterGenshinImpact.GameTask.QuickTeleport.Assets;
 using BetterGenshinImpact.Helpers.Extensions;
 using BetterGenshinImpact.Service.Notification;
 using BetterGenshinImpact.Service.Notification.Model.Enum;
+using BetterGenshinImpact.Helpers;
+using BetterGenshinImpact.Service.Interface;
 using Microsoft.Extensions.Logging;
 using OpenCvSharp;
 using System;
@@ -188,7 +190,8 @@ public class AutoStygianOnslaughtTask : StateMachineBase<StygianState, BvPage>, 
         Initialize(ct, StygianState.Unknown);
 
         Init();
-        Notify.Event(NotificationEvent.DomainStart).Success($"{Name}启动");
+        Notify.Event(NotificationEvent.DomainStart).Success(
+            TranslationHelper.Format("{0}启动", MissingTextSource.Notification, Name));
 
         try
         {
@@ -205,7 +208,8 @@ public class AutoStygianOnslaughtTask : StateMachineBase<StygianState, BvPage>, 
 
         await Delay(3000, ct);
         await ArtifactSalvage();
-        Notify.Event(NotificationEvent.DomainEnd).Success($"{Name}结束");
+        Notify.Event(NotificationEvent.DomainEnd).Success(
+            TranslationHelper.Format("{0}结束", MissingTextSource.Notification, Name));
     }
 
     private async Task DoDomain()
@@ -598,7 +602,8 @@ public class AutoStygianOnslaughtTask : StateMachineBase<StygianState, BvPage>, 
                 break;
             }
 
-            Notify.Event(NotificationEvent.DomainReward).Success($"{Name}奖励领取");
+            Notify.Event(NotificationEvent.DomainReward).Success(
+                TranslationHelper.Format("{0}奖励领取", MissingTextSource.Notification, Name));
             // 点击继续后会直接进入战斗场地（等待 ContinueOrExit 的邻接状态）
             CurrentState = StygianState.ContinueOrExit;
             await EnsureNextStateTransition(60000);

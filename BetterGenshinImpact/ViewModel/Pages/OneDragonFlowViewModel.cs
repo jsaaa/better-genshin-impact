@@ -575,7 +575,7 @@ public partial class OneDragonFlowViewModel : ViewModel
             _logger.LogInformation("没有一条龙任务!");
         }
 
-        Notify.Event(NotificationEvent.DragonStart).Success("一条龙启动");
+        Notify.Event(NotificationEvent.DragonStart).Success(TranslationHelper.T("一条龙启动", MissingTextSource.Notification));
         foreach (var task in taskListCopy)
         {
             if (task is { IsEnabled: true, Action: not null })
@@ -599,7 +599,7 @@ public partial class OneDragonFlowViewModel : ViewModel
                             return;
                         }
 
-                        Notify.Event(NotificationEvent.DragonStart).Success("配置组任务启动");
+                        Notify.Event(NotificationEvent.DragonStart).Success(TranslationHelper.T("配置组任务启动", MissingTextSource.Notification));
 
                         if (SelectedConfig.TaskEnabledList[task.Name])
                         {
@@ -624,7 +624,7 @@ public partial class OneDragonFlowViewModel : ViewModel
                     _logger.LogInformation("任务被取消，退出执行");
                     if (CancellationContext.Instance.IsManualStop is false)
                     {
-                        Notify.Event(NotificationEvent.DragonEnd).Success("一条龙和配置组任务结束");
+                        Notify.Event(NotificationEvent.DragonEnd).Success(TranslationHelper.T("一条龙和配置组任务结束", MissingTextSource.Notification));
                     }
                     return; // 后续的检查任务也不执行
                 }
@@ -638,7 +638,7 @@ public partial class OneDragonFlowViewModel : ViewModel
             await Task.Delay(500);
             if (CancellationContext.Instance.IsManualStop is false)
             {
-                Notify.Event(NotificationEvent.DragonEnd).Success("一条龙和配置组任务结束");
+                Notify.Event(NotificationEvent.DragonEnd).Success(TranslationHelper.T("一条龙和配置组任务结束", MissingTextSource.Notification));
             }
             _logger.LogInformation("一条龙和配置组任务结束");
 

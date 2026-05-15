@@ -8,6 +8,7 @@ using BetterGenshinImpact.Core.Recognition;
 using BetterGenshinImpact.Core.Simulator;
 using BetterGenshinImpact.Core.Simulator.Extensions;
 using BetterGenshinImpact.Helpers;
+using BetterGenshinImpact.Service.Interface;
 using BetterGenshinImpact.Service.Notification;
 using BetterGenshinImpact.Service.Notification.Model.Enum;
 using Microsoft.Extensions.Localization;
@@ -71,12 +72,12 @@ public class CheckRewardsTask
             if (done)
             {
                 Logger.LogInformation("检查每日奖励结果：{Msg}", "今日奖励已领取");
-                Notify.Event(NotificationEvent.DailyReward).Success("检查每日奖励：已领取");
+                Notify.Event(NotificationEvent.DailyReward).Success(TranslationHelper.T("检查每日奖励：已领取", MissingTextSource.Notification));
             }
             else
             {
                 Logger.LogWarning("检查每日奖励结果：{Msg}，请手动检查！", "未领取");
-                Notify.Event(NotificationEvent.DailyReward).Error("检查到每日奖励未领取，请手动查看！");
+                Notify.Event(NotificationEvent.DailyReward).Error(TranslationHelper.T("检查到每日奖励未领取，请手动查看！", MissingTextSource.Notification));
             }
             await Delay(200, ct);
             await new ReturnMainUiTask().Start(ct);

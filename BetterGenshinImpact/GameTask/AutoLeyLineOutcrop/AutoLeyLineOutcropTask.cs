@@ -315,12 +315,12 @@ public class AutoLeyLineOutcropTask : ISoloTask
         if (_taskParam.IsNotification)
         {
             var text =
-                "树脂耗尽模式统计结果:\n" +
-                $"原粹树脂次数: {result.OriginalResinTimes}\n" +
-                $"浓缩树脂次数: {result.CondensedResinTimes}\n" +
-                $"须臾树脂次数: {result.TransientResinTimes}\n" +
-                $"脆弱树脂次数: {result.FragileResinTimes}\n" +
-                $"总次数: {result.Count}";
+                TranslationHelper.T("树脂耗尽模式统计结果:", MissingTextSource.Notification) + "\n" +
+                TranslationHelper.Format("原粹树脂次数: {0}", MissingTextSource.Notification, result.OriginalResinTimes) + "\n" +
+                TranslationHelper.Format("浓缩树脂次数: {0}", MissingTextSource.Notification, result.CondensedResinTimes) + "\n" +
+                TranslationHelper.Format("须臾树脂次数: {0}", MissingTextSource.Notification, result.TransientResinTimes) + "\n" +
+                TranslationHelper.Format("脆弱树脂次数: {0}", MissingTextSource.Notification, result.FragileResinTimes) + "\n" +
+                TranslationHelper.Format("总次数: {0}", MissingTextSource.Notification, result.Count);
             Notify.Event("AutoLeyLineOutcrop").Send(text);
         }
 

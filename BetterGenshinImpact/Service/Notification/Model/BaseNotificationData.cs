@@ -103,7 +103,7 @@ public class BaseNotificationData
 
         if (Data is string text)
         {
-            Data = TranslationHelper.T(text, MissingTextSource.Notification);
+            Data = TranslationHelper.TranslateMultiline(text, MissingTextSource.Notification);
         }
     }
 }

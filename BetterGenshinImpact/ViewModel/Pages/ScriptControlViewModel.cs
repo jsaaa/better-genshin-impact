@@ -387,7 +387,7 @@ public partial class ScriptControlViewModel : ViewModel
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    Toast.Information(status, time: 5000);
+                    Toast.Information(status);
                 });
             }
 
